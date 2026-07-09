@@ -1,0 +1,32 @@
+@model Product
+<table class="table table-dark table-borderless">
+    <thead>
+            <tr>
+                <td>Product Name</td>
+                <td>Category Name</td>
+                <td>Explanation</td>
+                <td>Price</td>
+                <td>Piece</td>
+                <td>Origin</td>
+            </tr>
+        </thead>
+        <tbody>
+           
+             <tr>
+                <td>@Model.ProductName</td>
+                <td>@Model.Category?.CategoryName</td>
+                <td>@Model.Explanation</td>
+                <td>@Model.Price</td>
+                <td>@Model.Piece</td>
+                <td>@Model.Origin</td>
+            </tr>   
+        </tbody>
+</table>
+<div class="text-center">
+    <div class="btn-group">
+        <a class="btn btn-warning" asp-controller="Product" asp-action="Index">
+            <i class="fa fa-back"></i>
+            Back
+        </a>
+    </div>
+</div>
