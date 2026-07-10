@@ -1,4 +1,5 @@
-using OnlineMarket.Entities;
+using Entities.Models;
+
 
 namespace Repositories.Contracts
 {

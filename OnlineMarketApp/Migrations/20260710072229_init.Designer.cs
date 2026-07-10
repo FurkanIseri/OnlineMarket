@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repositories;
 
@@ -10,198 +11,14 @@ using Repositories;
 namespace OnlineMarketApp.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20260710072229_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
-
-            modelBuilder.Entity("Entities.Models.Category", b =>
-                {
-                    b.Property<int>("CategoryId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("CategoryName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("CategoryId");
-
-                    b.ToTable("Categories");
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = 1,
-                            CategoryName = "Book"
-                        },
-                        new
-                        {
-                            CategoryId = 2,
-                            CategoryName = "Sports"
-                        },
-                        new
-                        {
-                            CategoryId = 3,
-                            CategoryName = "Game"
-                        },
-                        new
-                        {
-                            CategoryId = 4,
-                            CategoryName = "Electronic"
-                        });
-                });
-
-            modelBuilder.Entity("Entities.Models.Product", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int?>("CategoryId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Explanation")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Origin")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("Piece")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("Price")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("ProductName")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<bool>("ShowCase")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("ProductId");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            ProductId = 1,
-                            CategoryId = 4,
-                            Explanation = "16GB RAM, 512GB SSD",
-                            Origin = "USA",
-                            Piece = 10,
-                            Price = 45000,
-                            ProductName = "MacBook Pro M3",
-                            ShowCase = true
-                        },
-                        new
-                        {
-                            ProductId = 2,
-                            CategoryId = 4,
-                            Explanation = "Ergonomik Tasarım, Bluetooth",
-                            Origin = "China",
-                            Piece = 50,
-                            Price = 500,
-                            ProductName = "Kablosuz Mouse",
-                            ShowCase = false
-                        },
-                        new
-                        {
-                            ProductId = 3,
-                            CategoryId = 4,
-                            Explanation = "RGB Aydınlatmalı Red Switch",
-                            Origin = "China",
-                            Piece = 25,
-                            Price = 1200,
-                            ProductName = "Mekanik Klavye",
-                            ShowCase = true
-                        },
-                        new
-                        {
-                            ProductId = 4,
-                            CategoryId = 1,
-                            Explanation = "Sıfırdan İleri Seviye C# Rehberi",
-                            Origin = "Turkey",
-                            Piece = 100,
-                            Price = 250,
-                            ProductName = "C# ile Programlama",
-                            ShowCase = true
-                        },
-                        new
-                        {
-                            ProductId = 5,
-                            CategoryId = 1,
-                            Explanation = "Yazılım Mühendisliği Klasiği",
-                            Origin = "USA",
-                            Piece = 45,
-                            Price = 300,
-                            ProductName = "Clean Code",
-                            ShowCase = false
-                        },
-                        new
-                        {
-                            ProductId = 6,
-                            CategoryId = 2,
-                            Explanation = "Profesyonel Antrenman Topu",
-                            Origin = "Germany",
-                            Piece = 30,
-                            Price = 800,
-                            ProductName = "Futbol Topu",
-                            ShowCase = true
-                        },
-                        new
-                        {
-                            ProductId = 7,
-                            CategoryId = 2,
-                            Explanation = "Karbon Fiber Başlangıç Raketi",
-                            Origin = "France",
-                            Piece = 15,
-                            Price = 1500,
-                            ProductName = "Tenis Raketi",
-                            ShowCase = false
-                        },
-                        new
-                        {
-                            ProductId = 8,
-                            CategoryId = 2,
-                            Explanation = "2x5 kg Döküm Dambıl",
-                            Origin = "Turkey",
-                            Piece = 40,
-                            Price = 700,
-                            ProductName = "Dambıl Seti",
-                            ShowCase = false
-                        },
-                        new
-                        {
-                            ProductId = 9,
-                            CategoryId = 3,
-                            Explanation = "Klasik Kutu Oyunu",
-                            Origin = "USA",
-                            Piece = 60,
-                            Price = 400,
-                            ProductName = "Monopoly",
-                            ShowCase = true
-                        },
-                        new
-                        {
-                            ProductId = 10,
-                            CategoryId = 3,
-                            Explanation = "Ahşap El İşçiliği Satranç",
-                            Origin = "Turkey",
-                            Piece = 20,
-                            Price = 600,
-                            ProductName = "Satranç Takımı",
-                            ShowCase = true
-                        });
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
@@ -395,14 +212,190 @@ namespace OnlineMarketApp.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("Entities.Models.Product", b =>
+            modelBuilder.Entity("OnlineMarket.Entities.Category", b =>
                 {
-                    b.HasOne("Entities.Models.Category", "Category")
-                        .WithMany("Products")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                    b.Property<int>("CategoryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
 
-                    b.Navigation("Category");
+                    b.Property<string>("CategoryName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("CategoryId");
+
+                    b.ToTable("Categories");
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryId = 1,
+                            CategoryName = "Book"
+                        },
+                        new
+                        {
+                            CategoryId = 2,
+                            CategoryName = "Sports"
+                        },
+                        new
+                        {
+                            CategoryId = 3,
+                            CategoryName = "Game"
+                        },
+                        new
+                        {
+                            CategoryId = 4,
+                            CategoryName = "Electronic"
+                        });
+                });
+
+            modelBuilder.Entity("OnlineMarket.Entities.Product", b =>
+                {
+                    b.Property<int>("ProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Explanation")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Origin")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Piece")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("ShowCase")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("ProductId");
+
+                    b.HasIndex("CategoryId");
+
+                    b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = 1,
+                            CategoryId = 4,
+                            Explanation = "16GB RAM, 512GB SSD",
+                            Origin = "USA",
+                            Piece = 10,
+                            Price = 45000,
+                            ProductName = "MacBook Pro M3",
+                            ShowCase = true
+                        },
+                        new
+                        {
+                            ProductId = 2,
+                            CategoryId = 4,
+                            Explanation = "Ergonomik Tasarım, Bluetooth",
+                            Origin = "China",
+                            Piece = 50,
+                            Price = 500,
+                            ProductName = "Kablosuz Mouse",
+                            ShowCase = false
+                        },
+                        new
+                        {
+                            ProductId = 3,
+                            CategoryId = 4,
+                            Explanation = "RGB Aydınlatmalı Red Switch",
+                            Origin = "China",
+                            Piece = 25,
+                            Price = 1200,
+                            ProductName = "Mekanik Klavye",
+                            ShowCase = true
+                        },
+                        new
+                        {
+                            ProductId = 4,
+                            CategoryId = 1,
+                            Explanation = "Sıfırdan İleri Seviye C# Rehberi",
+                            Origin = "Turkey",
+                            Piece = 100,
+                            Price = 250,
+                            ProductName = "C# ile Programlama",
+                            ShowCase = true
+                        },
+                        new
+                        {
+                            ProductId = 5,
+                            CategoryId = 1,
+                            Explanation = "Yazılım Mühendisliği Klasiği",
+                            Origin = "USA",
+                            Piece = 45,
+                            Price = 300,
+                            ProductName = "Clean Code",
+                            ShowCase = false
+                        },
+                        new
+                        {
+                            ProductId = 6,
+                            CategoryId = 2,
+                            Explanation = "Profesyonel Antrenman Topu",
+                            Origin = "Germany",
+                            Piece = 30,
+                            Price = 800,
+                            ProductName = "Futbol Topu",
+                            ShowCase = true
+                        },
+                        new
+                        {
+                            ProductId = 7,
+                            CategoryId = 2,
+                            Explanation = "Karbon Fiber Başlangıç Raketi",
+                            Origin = "France",
+                            Piece = 15,
+                            Price = 1500,
+                            ProductName = "Tenis Raketi",
+                            ShowCase = false
+                        },
+                        new
+                        {
+                            ProductId = 8,
+                            CategoryId = 2,
+                            Explanation = "2x5 kg Döküm Dambıl",
+                            Origin = "Turkey",
+                            Piece = 40,
+                            Price = 700,
+                            ProductName = "Dambıl Seti",
+                            ShowCase = false
+                        },
+                        new
+                        {
+                            ProductId = 9,
+                            CategoryId = 3,
+                            Explanation = "Klasik Kutu Oyunu",
+                            Origin = "USA",
+                            Piece = 60,
+                            Price = 400,
+                            ProductName = "Monopoly",
+                            ShowCase = true
+                        },
+                        new
+                        {
+                            ProductId = 10,
+                            CategoryId = 3,
+                            Explanation = "Ahşap El İşçiliği Satranç",
+                            Origin = "Turkey",
+                            Piece = 20,
+                            Price = 600,
+                            ProductName = "Satranç Takımı",
+                            ShowCase = true
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -456,7 +449,17 @@ namespace OnlineMarketApp.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Entities.Models.Category", b =>
+            modelBuilder.Entity("OnlineMarket.Entities.Product", b =>
+                {
+                    b.HasOne("OnlineMarket.Entities.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("OnlineMarket.Entities.Category", b =>
                 {
                     b.Navigation("Products");
                 });

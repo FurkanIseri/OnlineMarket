@@ -1,8 +1,8 @@
 using System.Reflection;
+using Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using OnlineMarket.Entities;
 
 namespace Repositories
 {
@@ -12,12 +12,9 @@ namespace Repositories
         {
         }
 
-        protected RepositoryContext()
-        {
-        }
-
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
+        public DbSet<Order> Orders { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

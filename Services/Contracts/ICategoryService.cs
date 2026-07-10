@@ -1,4 +1,4 @@
-using OnlineMarket.Entities;
+using Entities.Models;
 
 namespace Services.Contracts
 {

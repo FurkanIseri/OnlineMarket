@@ -1,6 +1,14 @@
-
-
 @model IEnumerable<Product>
+<div class="text-center">
+    <h1>Products</h1>
+</div>
+<div class="row">
+    <div class="d-flex justify-content-end my-2">
+        <div class="text-center my-2">
+            <a class="btn btn-success" asp-area="Admin" asp-controller="Product" asp-action="Create">Create</a>
+        </div>
+    </div>
+</div>
 <div class="text-center">
     <table class="table table-striped-columns">
         <thead>
@@ -24,9 +32,13 @@
                 <td>@product.Piece</td>
                 <td>@product.Origin</td>
                 <td>    
-                        <a asp-controller="Product" asp-action="Get" asp-route-id="@product.ProductId" class="btn btn-primary">
-                         <i class="fa fa-member"></i>
-                         Details   
+                        <a asp-area="Admin"  asp-controller="Product" asp-action="Update" asp-route-id="@product.ProductId" class="btn btn-warning">
+                        <i class="fa-solid fa-arrow-rotate-right"></i>
+                        Update   
+                        </a>
+                        <a asp-area="Admin"  asp-controller="Product" asp-action="Delete" asp-route-id="@product.ProductId" class="btn btn-danger">
+                        <i class="fa-solid fa-arrow-rotate-right"></i>
+                        Delete   
                         </a>
                 </td>
             </tr>   

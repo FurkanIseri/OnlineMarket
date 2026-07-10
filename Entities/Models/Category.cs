@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
+using Entities.Models;
 
-namespace OnlineMarket.Entities
+namespace Entities.Models
 {
     public class Category
     {

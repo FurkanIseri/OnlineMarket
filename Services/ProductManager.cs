@@ -1,5 +1,5 @@
 ﻿using System.Data.Common;
-using OnlineMarket.Entities;
+using Entities.Models;
 using Repositories.Contracts;
 using Services.Contracts;
 
@@ -43,6 +43,11 @@ namespace Services
                 throw new Exception("Ürün Bulunumadı");
             }
             return product;
+        }
+
+        public IEnumerable<Product> GetShowcaseProducts(bool trackchanges)
+        {
+            return _manager.Product.GetShowcaseProducts(trackchanges);
         }
 
         public void UpdateOneProduct(Product product)

@@ -4,9 +4,9 @@ using Repositories.Contracts;
 
 namespace Repositories
 {
-    public abstract class RepositoryBase<T> : RepositoryContext, IRepositoryBase<T> where T : class, new()
+    public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class, new()
     {
-        private readonly RepositoryContext _context;
+        protected readonly RepositoryContext _context;
 
         protected RepositoryBase(RepositoryContext context)
         {

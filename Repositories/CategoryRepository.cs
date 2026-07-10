@@ -1,5 +1,6 @@
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
-using OnlineMarket.Entities;
+
 using Repositories.Contracts;
 
 namespace Repositories

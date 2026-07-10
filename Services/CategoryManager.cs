@@ -1,5 +1,5 @@
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
-using OnlineMarket.Entities;
 using Repositories.Contracts;
 using Services.Contracts;
 

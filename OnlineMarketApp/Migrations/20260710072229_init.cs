@@ -178,10 +178,10 @@ namespace OnlineMarketApp.Migrations
                     ProductId = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
                     ProductName = table.Column<string>(type: "TEXT", nullable: false),
-                    Explanation = table.Column<string>(type: "TEXT", nullable: true),
+                    Explanation = table.Column<string>(type: "TEXT", nullable: false),
                     Price = table.Column<int>(type: "INTEGER", nullable: false),
                     Piece = table.Column<int>(type: "INTEGER", nullable: false),
-                    Origin = table.Column<string>(type: "TEXT", nullable: true),
+                    Origin = table.Column<string>(type: "TEXT", nullable: false),
                     ShowCase = table.Column<bool>(type: "INTEGER", nullable: false),
                     CategoryId = table.Column<int>(type: "INTEGER", nullable: true)
                 },
@@ -192,7 +192,8 @@ namespace OnlineMarketApp.Migrations
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "CategoryId");
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.InsertData(

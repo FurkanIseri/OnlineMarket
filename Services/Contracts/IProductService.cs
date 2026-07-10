@@ -1,4 +1,4 @@
-using OnlineMarket.Entities;
+using Entities.Models;
 
 namespace Services.Contracts
 {
@@ -6,6 +6,7 @@ namespace Services.Contracts
     {
         IEnumerable<Product> GetAllProducts(bool trackchanges);
         Product? GetOneProduct(int id,bool trackchanges);
+        IEnumerable<Product> GetShowcaseProducts(bool trackchanges);
         void CreateOneProduct(Product product);
         void UpdateOneProduct(Product product);
         void DeleteOneProduct(int id);

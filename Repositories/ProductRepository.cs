@@ -1,5 +1,5 @@
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
-using OnlineMarket.Entities;
 using Repositories.Contracts;
 
 namespace Repositories
@@ -22,6 +22,11 @@ namespace Repositories
             return FindByCondition(p => p.ProductId.Equals(id),trackchanges)
             .Include(p =>p.Category)
             .SingleOrDefault();
+        }
+
+        public IQueryable<Product> GetShowcaseProducts(bool trackchanges)
+        {
+            return FindAll(trackchanges).Where(p => p.ShowCase == true);
         }
 
         public void UpdateOneProduct(Product product) => Update(product);

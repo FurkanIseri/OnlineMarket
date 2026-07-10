@@ -1,6 +1,7 @@
+using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OnlineMarket.Entities;
+
 
 namespace Repositories.Config
 {
@@ -11,10 +12,10 @@ namespace Repositories.Config
             builder.HasKey(p => p.CategoryId);
             builder.Property(p => p.CategoryName);
             builder.HasData(
-                new Category(){CategoryId = 1,CategoryName = "Book"},
-                new Category(){CategoryId = 2,CategoryName = "Sports"},
-                new Category(){CategoryId = 3,CategoryName = "Game"},
-                new Category(){CategoryId = 4,CategoryName = "Electronic"}
+                new { CategoryId = 1, CategoryName = "Book" },
+                new { CategoryId = 2, CategoryName = "Sports" },
+                new { CategoryId = 3, CategoryName = "Game" },
+                new { CategoryId = 4, CategoryName = "Electronic" }
             );
         }
     }

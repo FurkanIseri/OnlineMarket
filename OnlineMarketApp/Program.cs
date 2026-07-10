@@ -4,7 +4,7 @@ using OnlineMarketApp.Infrastructere.Extensions;
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.ConfigureDbContext(builder.Configuration);
 builder.Services.ConfigureSession();
-builder.Services.ConfigureSession();
+
 
 builder.Services.ConfigureRepositoryRegistration();
 
@@ -26,16 +26,26 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
+
+app.UseSession();
 
 app.UseAuthorization();
 
-app.MapStaticAssets();
+
+
+// Route komutları
+app.MapAreaControllerRoute(
+    name: "Admin",
+    areaName: "Admin",
+    pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}" 
+);
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}")
-    .WithStaticAssets();
+    pattern: "{controller=Home}/{action=Index}/{id?}"
+);
 
 
 app.Run();

@@ -1,4 +1,5 @@
-using OnlineMarket.Entities;
+using Entities.Models;
+
 
 namespace Repositories.Contracts
 {
@@ -6,6 +7,7 @@ namespace Repositories.Contracts
     {
         IQueryable<Product> GetAllProducts(bool trackchanges);
         Product? GetOneProduct(int id,bool trackchanges);
+        IQueryable<Product> GetShowcaseProducts(bool trackchanges);
         void CreateOneProduct(Product product);
         void DeleteOneProduct(Product product);
         void UpdateOneProduct(Product product);
