@@ -36,12 +36,14 @@ namespace OnlineMarketApp.Infrastructere.Extensions
             services.AddScoped<IRepositoryManager,RepositoryManager>();
             services.AddScoped<IProductRepository,ProductRepository>();
             services.AddScoped<ICategoryRepository,CategoryRepository>();
+            services.AddScoped<IOrderRepository,OrderRepository>();
         }
         public static void ConfigureServiceRegistration(this IServiceCollection services)
         {
             services.AddScoped<IServicerManager,ServiceManager>();
             services.AddScoped<IProductService,ProductManager>();
             services.AddScoped<ICategoryService,CategoryManager>();
+            services.AddScoped<IOrderService,OrderManager>();
         }
         public static void ConfigurRooting(this IServiceCollection services)
         {

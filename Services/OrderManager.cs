@@ -30,7 +30,7 @@ namespace Services
 
         public void saveOrder(Order order)
         {
-            _manager.Order.saveOrder(order);
+            _manager.Order.SaveOrder(order);
         }
     }
 }

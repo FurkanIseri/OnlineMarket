@@ -34,7 +34,7 @@ namespace Repositories
             return FindByCondition(o => o.OrderId.Equals(id),false).SingleOrDefault();
         }
 
-        public void saveOrder(Order order)
+        public void SaveOrder(Order order)
         {
             _context.AttachRange(order.Lines.Select(l => l.Product));
             if(order.OrderId == 0)
