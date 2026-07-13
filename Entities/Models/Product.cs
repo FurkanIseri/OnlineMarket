@@ -16,6 +16,7 @@ namespace Entities.Models
         public int Piece { get; set; }
         [Required(ErrorMessage ="Origin is required.")]
         public String? Origin { get; set; } = String.Empty;
+        public String? ImageUrl {get; set;}
         public bool ShowCase { get; set; } = false;
         public int? CategoryId { get; set; }
         public Category? Category { get; set; }

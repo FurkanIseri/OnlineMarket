@@ -1,6 +1,8 @@
 using Entities.Models;
+using Entities.RequestParameters;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Contracts;
+using Repositories.Extensions;
 
 namespace Repositories
 {
@@ -16,6 +18,15 @@ namespace Repositories
 
         public IQueryable<Product> GetAllProducts(bool trackchanges) => FindAll(trackchanges).Include(p => p.Category);
 
+        public IQueryable<Product> GetAllProductsWithDetails(ProductRequestParameter p)
+        {
+            return _context
+            .Products
+            .FilteredByCategoryId(p.CategoryId)
+            .FilteredBySearchTerm(p.SearchTerm)
+            .FilteredByPrice(p.MaxPrice,p.MinPrice,p.IsValidPrice)
+            .ToPaginate(p.PageNumber,p.PageSize);
+        }
 
         public Product? GetOneProduct(int id, bool trackchanges)
         {

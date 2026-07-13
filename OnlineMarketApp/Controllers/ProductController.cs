@@ -1,4 +1,6 @@
+using Entities.RequestParameters;
 using Microsoft.AspNetCore.Mvc;
+using OnlineMarketApp.Models;
 using Services.Contracts;
 
 namespace OnlineMarketApp.Controllers
@@ -12,10 +14,20 @@ namespace OnlineMarketApp.Controllers
             _manager = manager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(ProductRequestParameter p)
         {
-            var model = _manager.ProductService.GetAllProducts(false);
-            return View(model);
+            var products = _manager.ProductService.GetAllProductsWithDetails(p);
+            var pagination = new Pagination()
+            {
+                CurrentPage = p.PageNumber,
+                ItemsPerPage = p.PageSize,
+                TotalItems = _manager.ProductService.GetAllProducts(false).Count()
+            };
+            return View(new ProductListViewModel()
+            {
+               Products = products,
+               Pagination = pagination 
+            });
         }
         public IActionResult Get([FromRoute(Name ="id")] int id)
         {

@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Entities.Models;
 using Services.Contracts;
+using Entities.RequestParameters;
+using OnlineMarketApp.Models;
+using Entities.Dtos;
 
 namespace OnlineMarketApp.Areas.Admin.Controllers
 {
@@ -14,10 +17,21 @@ namespace OnlineMarketApp.Areas.Admin.Controllers
             _manager = manager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index([FromQuery]ProductRequestParameter p)
         {
-            var products = _manager.ProductService.GetAllProducts(false);
-            return View(products);
+            ViewData["Title"] = "Product";
+            var products = _manager.ProductService.GetAllProductsWithDetails(p);
+            var pagination = new Pagination()
+            {
+                CurrentPage = p.PageNumber,
+                ItemsPerPage = p.PageSize,
+                TotalItems = _manager.ProductService.GetAllProducts(false).Count()
+            };
+            return View(new ProductListViewModel()
+            {
+                Products = products,
+                Pagination = pagination
+            });
         }
         public IActionResult Create()
         {
@@ -25,11 +39,18 @@ namespace OnlineMarketApp.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([FromForm] Product product)
+        public async Task<IActionResult> Create([FromForm] ProductDtoForInsertion productDto,IFormFile file)
         {
             if (ModelState.IsValid)
             {
-                _manager.ProductService.CreateOneProduct(product);
+                string path = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot","images",file.Name);
+                using (var stream = new FileStream(path,FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+                productDto.ImageUrl = String.Concat("/images",file.FileName);
+                _manager.ProductService.CreateOneProduct(productDto);
+                TempData["success"] = $"{productDto.ProductName} has been created.";
                 return RedirectToAction("Index");
             }
             return View();
@@ -41,11 +62,17 @@ namespace OnlineMarketApp.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Update([FromForm] Product product)
+        public async Task<IActionResult> Update([FromForm] ProductDtoForUpdate productDto,IFormFile file)
         {
+            string path = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot,images",file.FileName);
+            using (var stream = new FileStream(path,FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+            productDto.ImageUrl = String.Concat("/images/",file.FileName);
             if (ModelState.IsValid)
             {
-                _manager.ProductService.UpdateOneProduct(product);
+                _manager.ProductService.UpdateOneProduct(productDto);
                 return RedirectToAction("Index");
             }
             return View();
